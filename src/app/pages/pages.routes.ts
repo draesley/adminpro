@@ -14,7 +14,7 @@ const pagesRoutes: Routes = [
                 component:DashboardComponent
             },
             {
-                path:'pogress',
+                path:'progress',
                 component:ProgressComponent
             },
             {
