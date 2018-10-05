@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 //import { map } from 'rxjs';
 import { map, filter, catchError, mergeMap } from 'rxjs/operators'
 import { Router } from '@angular/router';
+import { UploadFileService } from '../services.index';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class UserService {
 
   constructor(
       private http:HttpClient,
-      private router:Router
+      private router:Router,
+      private uploadFileService:UploadFileService
   ) { 
     this.loadStorage();
   }
@@ -92,4 +94,28 @@ export class UserService {
       return res.user;
     }));
   }
+
+  updateUser(user:User){
+
+    let url = URL_SERVICES + '/user/' + user._id;
+    url += '?token=' + this.token;
+
+     return this.http.put(url,user).pipe(map((res:any) =>{
+        let userdb = res.User;
+           this.saveStorage(userdb._id,this.token, userdb);
+            swal('User Update ',userdb.name,'success');
+            return true;
+      }));
+  }
+
+  changeImage(file:File, id:string){
+      this.uploadFileService.uploadFile(file, 'users', id)
+      .then((res:any)=>{
+        this.user.img = res.user.img;
+        this.saveStorage(id, this.token, this.user);
+      })
+      .catch(res=>{
+          swal('!errorrr',res,'Not image');
+      });
+  };
 }

@@ -10,6 +10,7 @@ import { RegisterComponent } from './login/register.component';
 import { PagesModule } from './pages/pages.module';
 import { ServiceModule } from './services/service.module';
 import { CommonModule } from '@angular/common';
+import { ImagePipe } from './pipes/image.pipe';
 
 
 @NgModule({

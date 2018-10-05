@@ -7,6 +7,7 @@ import { AccoutSettingComponent } from "./accout-setting/accout-setting.componen
 import { PromisesComponent } from "./promises/promises.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
 import { LoginGuardGuard } from '../services/guards/login-guard.guard';
+import { ProfileComponent } from "./profile/profile.component";
 
 const pagesRoutes: Routes = [
     {
@@ -43,6 +44,11 @@ const pagesRoutes: Routes = [
                 path:'accout-setting',
                 component:AccoutSettingComponent,
                 data:{title:'Accout-Setting'}
+            },
+            {
+                path:'profile',
+                component:ProfileComponent,
+                data:{title:'Profile'}
             },
             {
                 path:'rxjs',
