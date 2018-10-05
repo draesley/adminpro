@@ -6,11 +6,13 @@ import { Grafic1Component } from "./grafic1/grafic1.component";
 import { AccoutSettingComponent } from "./accout-setting/accout-setting.component";
 import { PromisesComponent } from "./promises/promises.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
+import { LoginGuardGuard } from '../services/guards/login-guard.guard';
 
 const pagesRoutes: Routes = [
     {
         path:'',
         component:PagesComponent,
+        canActivate:[LoginGuardGuard],
         children:[
             {
                 path:'dashboard',
