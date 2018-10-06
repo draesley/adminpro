@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SettingService, SidebarService, SharedService, UploadFileService } from './services.index';
+import { SettingService, SidebarService, SharedService, UploadFileService, LoginGuardGuard } from './services.index';
 import { UserService } from './user/user.service';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginGuardGuard } from './guards/login-guard.guard';
+import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { LoginGuardGuard } from './guards/login-guard.guard';
     SidebarService,
     UserService,
     LoginGuardGuard,
-    UploadFileService
+    UploadFileService,
+    ModalUploadService
   ]
 })
 export class ServiceModule { }

@@ -6,8 +6,9 @@ import { Grafic1Component } from "./grafic1/grafic1.component";
 import { AccoutSettingComponent } from "./accout-setting/accout-setting.component";
 import { PromisesComponent } from "./promises/promises.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
-import { LoginGuardGuard } from '../services/guards/login-guard.guard';
+import { LoginGuardGuard } from '../services/guards/loginGuard.guard';
 import { ProfileComponent } from "./profile/profile.component";
+import { UsersComponent } from "../pages/users/users.component";
 
 const pagesRoutes: Routes = [
     {
@@ -54,6 +55,22 @@ const pagesRoutes: Routes = [
                 path:'rxjs',
                 component:RxjsComponent,
                 data:{title:'Observable'}
+            },
+            //Mantenimiento
+            {
+                path:'users',
+                component:UsersComponent,
+                data:{title:'Users'}
+            },
+            {
+                path:'doctors',
+                component:UsersComponent,
+                data:{title:'Doctors'}
+            },
+            {
+                path:'hospitales',
+                component:UsersComponent,
+                data:{title:'Hospitales'}
             }
         ]
     },

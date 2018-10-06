@@ -4,9 +4,10 @@ import { URL_SERVICES } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
 //import 'rxjs/add/operator/map'
 //import { map } from 'rxjs';
-import { map, filter, catchError, mergeMap } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { UploadFileService } from '../services.index';
+import { UploadFileService } from '../uploadFile/uploadFile.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -101,10 +102,14 @@ export class UserService {
     url += '?token=' + this.token;
 
      return this.http.put(url,user).pipe(map((res:any) =>{
+
+      if(user._id === this.user._id){
         let userdb = res.User;
-           this.saveStorage(userdb._id,this.token, userdb);
-            swal('User Update ',userdb.name,'success');
-            return true;
+        this.saveStorage(userdb._id,this.token, userdb);
+      }
+       
+        swal('User Update ',user.name,'success');
+        return true;
       }));
   }
 
@@ -118,4 +123,23 @@ export class UserService {
           swal('!errorrr',res,'Not image');
       });
   };
+
+  loadUsers(since:number = 0){
+
+      let url = URL_SERVICES + '/user?desde=' + since;
+     return  this.http.get(url);
+  }
+
+  searchUser(index:string){
+      let url = URL_SERVICES + '/search/collection/users/' + index;
+      return this.http.get(url).pipe(map((res:any)=> res.users));
+
+  }
+
+  deleteUser(id:string){
+    let url = URL_SERVICES + '/user/' + id;
+    url += '?token=' + this.token;
+
+    return this.http.delete(url);
+  }
 }

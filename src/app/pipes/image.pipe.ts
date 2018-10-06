@@ -22,7 +22,6 @@ export class ImagePipe implements PipeTransform {
     switch(type){
       case 'users':
         url += '/users/' + img;
-        console.log(img);
       break;
       case 'doctors':
         url += '/doctor/' + img;
@@ -32,7 +31,7 @@ export class ImagePipe implements PipeTransform {
         url += '/hospital/' + img;
       break;
       default:{
-        console.log('el typo no existe');
+        swal('The type of image does not exist','only png, jpg, jpeg, gif','warning');
         url += '/users/xxxx';
       }
     }
