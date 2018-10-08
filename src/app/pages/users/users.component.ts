@@ -92,6 +92,8 @@ export class UsersComponent implements OnInit {
   }
 
   updateUser(user:User){
+
+    console.log(user);
     this.userService.updateUser(user).subscribe();
   }
 

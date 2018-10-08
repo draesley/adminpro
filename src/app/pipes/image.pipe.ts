@@ -24,15 +24,16 @@ export class ImagePipe implements PipeTransform {
         url += '/users/' + img;
       break;
       case 'doctors':
-        url += '/doctor/' + img;
+        url += '/doctors/' + img;
         
       break;
       case 'hospitales':
-        url += '/hospital/' + img;
+        url += '/hospitales/' + img;
       break;
       default:{
         swal('The type of image does not exist','only png, jpg, jpeg, gif','warning');
         url += '/users/xxxx';
+        break;
       }
     }
 
