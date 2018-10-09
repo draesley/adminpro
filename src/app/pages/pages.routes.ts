@@ -12,6 +12,8 @@ import { UsersComponent } from "../pages/users/users.component";
 import { HospitalesComponent } from "./hospitales/hospitales.component";
 import { DoctorComponent } from "./doctor/doctor.component";
 import { DoctorsComponent } from "./doctor/doctors.component";
+import { SearchComponent } from "./search/search.component";
+import { AdminGuard } from "../services/services.index";
 
 const pagesRoutes: Routes = [
     {
@@ -55,6 +57,11 @@ const pagesRoutes: Routes = [
                 data:{title:'Profile'}
             },
             {
+                path:'search/:termino',
+                component:SearchComponent,
+                data:{title:'Search'}
+            },
+            {
                 path:'rxjs',
                 component:RxjsComponent,
                 data:{title:'Observable'}
@@ -63,6 +70,9 @@ const pagesRoutes: Routes = [
             {
                 path:'users',
                 component:UsersComponent,
+                canActivate:[
+                    AdminGuard
+                ],
                 data:{title:'Users'}
             },
             {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../../app/models/user.model';
 import { URL_SERVICES } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
-//import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
 //import { map } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class UserService {
 
   user:User;
   token:string;
+  menu:any[] = [];
 
   constructor(
       private http:HttpClient,
@@ -29,9 +30,12 @@ export class UserService {
   loadOut(){
     this.user = null;
     this.token = '';
+    this.menu = [];
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('menu');
     this.router.navigate(['/login']);
+    
   }
 
   userSignin(){
@@ -42,20 +46,24 @@ export class UserService {
     if(localStorage.getItem('token')){
         this.token = localStorage.getItem('token');
         this.user = JSON.parse(localStorage.getItem('user'));
+        this.menu = JSON.parse(localStorage.getItem('menu'));
     }else{
       this.token = '';
       this.user = null;
+      this.menu = [];
     }
   }
 
-  saveStorage(id:string, token:string, user:User){
+  saveStorage(id:string, token:string, user:User, menu:any){
 
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('menu', JSON.stringify(menu));
 
     this.user = user;
     this.token = token;
+    this.menu = menu;
   }
 
   loginGoogle(token:string){
@@ -63,7 +71,7 @@ export class UserService {
     let url = URL_SERVICES + '/login/google';
 
     return this.http.post(url, {token}).pipe(map((res:any)=>{
-      this.saveStorage(res.id, res.token, res.user);
+      this.saveStorage(res.id, res.token, res.user, res.menu);
       return true;
     }));
   }
@@ -80,7 +88,7 @@ export class UserService {
 
     return this.http.post(url, user).pipe(map((res:any)=>{
 
-       this.saveStorage(res.id, res.token, res.user);
+       this.saveStorage(res.id, res.token, res.user, res.menu);
 
       return true;
     }));
@@ -105,7 +113,7 @@ export class UserService {
 
       if(user._id === this.user._id){
         let userdb = res.User;
-        this.saveStorage(userdb._id,this.token, userdb);
+        this.saveStorage(userdb._id,this.token, userdb, this.menu);
       }
        
         swal('User Update ',user.name,'success');
@@ -117,7 +125,7 @@ export class UserService {
       this.uploadFileService.uploadFile(file, 'users', id)
       .then((res:any)=>{
         this.user.img = res.user.img;
-        this.saveStorage(id, this.token, this.user);
+        this.saveStorage(id, this.token, this.user, this.menu);
       })
       .catch(res=>{
           swal('!errorrr',res,'Not image');
