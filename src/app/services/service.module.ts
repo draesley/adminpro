@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 import { HospitalService } from './hospital/hospital.service';
 import { DoctorService } from './doctor/doctor.service';
+import { ValidatedTokenGuard } from './guards/validated-token.guard';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DoctorService } from './doctor/doctor.service';
     ModalUploadService,
     HospitalService,
     DoctorService,
-    AdminGuard
+    AdminGuard,
+    ValidatedTokenGuard
   ]
 })
 export class ServiceModule { }

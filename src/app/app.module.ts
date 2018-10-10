@@ -10,6 +10,8 @@ import { RegisterComponent } from './login/register.component';
 import { PagesModule } from './pages/pages.module';
 import { ServiceModule } from './services/service.module';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
+import { PagesComponent } from './pages/pages.component';
 
 
 @NgModule({
@@ -18,15 +20,18 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     NopagefoundComponent,
     RegisterComponent,
+    PagesComponent,
+
   ],
   imports: [
     BrowserModule,
-    PagesModule,
+    //PagesModule,
     APP_ROUTES,
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    ServiceModule
+    ServiceModule,
+    SharedModule 
   ],
   providers: [
     

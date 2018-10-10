@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { User } from '../../app/models/user.model';
 import { URL_SERVICES } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/catch'
 //import { map } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UploadFileService } from '../uploadFile/uploadFile.service';
+import  swal  from 'sweetalert';
 
 
 @Injectable({
@@ -36,6 +36,20 @@ export class UserService {
     localStorage.removeItem('menu');
     this.router.navigate(['/login']);
     
+  }
+
+  refreshToken(){
+
+    let url = URL_SERVICES + '/login/refreshToken'
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+    .pipe(map( (res:any) =>{
+
+        this.token = res.token;
+        localStorage.setItem('token', this.token);
+        return true;
+    }));//se coloca el cath para redirecionar al login si el token no es valido seccion 18 video 230 minuto 4
   }
 
   userSignin(){

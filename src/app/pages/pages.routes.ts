@@ -13,17 +13,15 @@ import { HospitalesComponent } from "./hospitales/hospitales.component";
 import { DoctorComponent } from "./doctor/doctor.component";
 import { DoctorsComponent } from "./doctor/doctors.component";
 import { SearchComponent } from "./search/search.component";
-import { AdminGuard } from "../services/services.index";
+import { AdminGuard, ValidatedTokenGuard } from "../services/services.index";
 
 const pagesRoutes: Routes = [
-    {
-        path:'',
-        component:PagesComponent,
-        canActivate:[LoginGuardGuard],
-        children:[
             {
                 path:'dashboard',
                 component:DashboardComponent,
+                canActivate:[
+                    ValidatedTokenGuard
+                ],
                 data:{title:'Dashboard'}
             },
             {
@@ -90,8 +88,6 @@ const pagesRoutes: Routes = [
                 component:HospitalesComponent,
                 data:{title:'Hospitales'}
             }
-        ]
-    },
 ];
 
 export const PAGES_ROUTES = RouterModule.forChild(pagesRoutes);

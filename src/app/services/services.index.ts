@@ -1,3 +1,4 @@
+export { ValidatedTokenGuard } from './guards/validated-token.guard';
 export { AdminGuard } from './guards/admin.guard';
 export { DoctorService } from './doctor/doctor.service';
 export { HospitalService } from './hospital/hospital.service';

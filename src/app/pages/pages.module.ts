@@ -27,7 +27,7 @@ import { SearchComponent } from './search/search.component';
         DashboardComponent,
         ProgressComponent,
         Grafic1Component,
-        PagesComponent,
+        //PagesComponent, se quita y se coloca en app module
         IncrementComponent,
         GraficoDonaComponent,
         AccoutSettingComponent,
@@ -35,7 +35,7 @@ import { SearchComponent } from './search/search.component';
         RxjsComponent,
         ProfileComponent,
         UsersComponent,
-        ModalUploadComponent,
+        //ModalUploadComponent,
         HospitalesComponent,
         DoctorComponent,
         DoctorsComponent,
@@ -45,7 +45,7 @@ import { SearchComponent } from './search/search.component';
         DashboardComponent,
         ProgressComponent,
         Grafic1Component,
-        PagesComponent,
+        //PagesComponent,
     ],
     imports:[
         SharedModule,

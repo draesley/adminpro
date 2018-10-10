@@ -32,12 +32,16 @@ export class RxjsComponent implements OnInit, OnDestroy {
       return new Observable((observer: Subscriber<any>) =>{
       let counter = 0;
       
-      let itervalo = setInterval(()=>{
+      let intervalo = setInterval(()=>{
         counter +=1;
 
         const exit = {
           value:counter,
         };
+
+        let salida = {
+          valor: counter
+        }
 
         observer.next(exit);
         /* if(counter === 3){
@@ -49,8 +53,9 @@ export class RxjsComponent implements OnInit, OnDestroy {
           //clearInterval(itervalo);
           observer.error('Auxilio');
         } */
-      },1000);
+      },500);
       }).pipe(
+        retry(2),
         map(resp => resp.value),
         filter((value,index)=> {
           if((value % 2) == 1){
